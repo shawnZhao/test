@@ -13,7 +13,9 @@
         }
     ],
     "require": {
-        "slim/slim": "2.2.0"
+        "slim/slim": "2.2.0",
+        "slim/extras": ">=1.0.0",
+        "twig/twig": "1.*"
     },
     "autoload": {
         "psr-0": { "Slim": "." }
