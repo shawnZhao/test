@@ -1,0 +1,21 @@
+{
+    "name": "shawn/test",
+    "type": "application",
+    "description": "test",
+    "keywords": ["test","rest","router"],
+    "homepage": "http://github.com/shawnZhao/test",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shawn Zhao",
+            "email": "none",
+            "homepage": "none"
+        }
+    ],
+    "require": {
+        "slim/slim": "2.2.0"
+    },
+    "autoload": {
+        "psr-0": { "Slim": "." }
+    }
+}
