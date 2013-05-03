@@ -9,12 +9,15 @@ $aBitOfInfo = function (\Slim\Route $route) {
 	echo "Current route is " . $route->getName();
 };
 
-$app->get('/', function () {
-	echo 'index request';
+$app->get('/', function () use ($app) {
+	echo $app->render('index.html');
 });
 
 $app->get('/welcome', $aBitOfInfo, function () use ($app) {
-	echo $app->render('welcome.html', array('name' => 'shawn'));
+	echo $app->render('welcome.html', array(
+			'name' => 'shawn',
+			'buttonJs' => buttonJS
+			));
 // 	$url = $app->urlFor('home', array('args' => 'Josh'));
 // 	$app->redirect($url);
 })->name('welcome');

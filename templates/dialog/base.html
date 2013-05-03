@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block head %}
+	{{ parent() }}
+	<link href="/static/css/index.css" type="text/css" rel="stylesheet" />
+	<link href="/static/css/weibo.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="/static/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/jquery/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/static/js/jquery/jquery.textlimit.js"></script>
+	<script type="text/javascript" src="/static/js/jquery/ui/jquery.ui.core.js"></script>
+	<script type="text/javascript" src="/static/js/jquery/ui/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="/static/js/jquery/ui/jquery.ui.mouse.js"></script>
+	<script type="text/javascript" src="/static/js/jquery/ui/jquery.ui.draggable.js"></script>
+	<script type="text/javascript" src="/static/js/jquery/jquery.postmessage.min.js"></script>
+	<script type="text/javascript" src="/static/js/common.js"></script>
+	<script>
+	var images = [];
+	$.receiveMessage( function(e){
+		if(e.data==='asynLoad'){
+			$.postMessage( 'openWTXToolLay', decodeURIComponent(' {{refer}} '), parent );
+		}else{
+			images = e.data.split(',');
+			setImageSrc();
+		}
+	}, '{{referUrl["scheme"]}}://{{referUrl["host"]}}' );
+	function showTip(){
+		$.cookie('chooseImgTip')?'':$('#featuresRemind').show();
+	}
+	function iknow(){
+		$.cookie('chooseImgTip', '1', {expires:365});
+		$('#featuresRemind').remove();
+	}
+	function setImageSrc(){
+		$('#attachLay .attach_body').html('');
+		if(images.length>1){
+			showTip();
+			$('#attachLay .top .more .left').addClass('lnull');
+			$('#attachLay .top .more .right').removeClass('rnull');
+			$('#attachLay .top .more').show();
+		}else{
+			$('#featuresRemind').hide();
+			$('#attachLay .top .more').hide();
+		}
+		$('#attachment').val(images[0]);
+		$('#attachLay .attach_body').append('<img src="'+images[0]+'" data-value="0" class="attach_img" onload="ImageSizeFix(this);" />');
+		$('#attachLay').show();
+	}
+
+	function imgPreview(x){
+		currentImgNO = $('#attachLay .attach_img').attr('data-value');
+		newImgNO = parseInt(currentImgNO)+x;
+		if(images[newImgNO]){
+			$('#attachLay .attach_img').attr('src',images[newImgNO]).attr('data-value',newImgNO);
+			$('#attachment').val(images[newImgNO]);
+			$('#attachLay .top .more .left').removeClass('lnull');
+			$('#attachLay .top .more .right').removeClass('rnull');
+			if(x>0){
+				images[newImgNO+x]?'':$('#attachLay .top .more .right').addClass('rnull');
+			}else{
+				images[newImgNO+x]?'':$('#attachLay .top .more .left').addClass('lnull');
+			}
+		}else{}
+	}
+		
+	function closeToolLayout(){
+		deleteImg();
+		$('#noticeLay').hide();
+		$.postMessage( 'closeWTXToolLay', decodeURIComponent(' {{refer}} '), parent );
+	}
+
+	function deleteImg(){
+		$('#attachment').val('');
+		$('#attachLay .attach_body img').attr('src', '');
+		$('#attachLay').hide();
+	}
+	$(function() {
+		$( "#uploadLay" ).draggable({ 
+			handle: '.header', 
+			containment: '#overLayout', 
+			scroll: false
+		});
+		$.postMessage( 'openWTXToolLay', decodeURIComponent(' {{refer}} '), parent );
+	});
+	</script>
+{% endblock %}
+{% block main %}
+	<div id="overLayout"></div>
+	{% block dialog %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "dialog/base.html" %}
+{% block title %}云图钉-发微博{% endblock %}
+
+{% block dialog %}
+	<div id="uploadLay" style="top:50px">
+		<script type="text/javascript" src="/js/upload.js"></script>
+		<div class="header">
+			<span class="title_content">有什么新鲜事想告诉大家？</span>
+			<a class="close" href="javascript:closeToolLayout();"></a>
+		</div>
+		<div class="body">
+	    	<div class="left">还可以输入<span id="count"></span>字</div>
+    		<textarea id="sinaText" name="content"></textarea>
+			<div class="submit">
+				<input data-refer="webtool" id="publishButton" class="publish_button" type="button" value="" />
+				<input type="hidden" id="attachment" name="attachment" value="" />
+				<input type="hidden" id="refer" name="refer" value="<?php echo $refer ?>" />
+			</div>
+			<div id="tool" class="tool">
+				<a class="face" href="#" style="display:none;">表情</a>
+	    		<a class="attach" href="javascript:void(0);">上传图片</a>
+	    		<?php if($_SESSION['user']['roles']!='USER') { ?><a class="timing" href="javascript:void(0);">定时发送</a><?php } ?>
+	    		<span id="showTiming"></span>
+	    		<div id="attachLay" class="tool_lay" style="display:block;">
+	    			<div class="top">
+	    				<div class="more" style="display:none">
+	    					<a href="javascript:imgPreview(-1);" title="上一张" class="left lnull">上一张</a>
+	    					<a href="javascript:imgPreview(1);" title="下一张" class="right">下一张</a>
+						</div>
+	    				<a href="javascript:deleteImg();">删除</a>
+	    			</div>
+	    			<div class="attach_body"></div>
+	    			<div class="lay_arrow"></div>
+	    			<div id="featuresRemind" style="display:none">
+	    				<p class="text">在这里选择其他图片。</p>
+	    				<p class="knowit"><a href="javascript:iknow();">知道了</a></p>
+	    			</div>
+	    		</div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+<link href="/static/js/jquery/ui/css/jquery-ui.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery/ui/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/js/jquery/ui/i18n/jquery-ui-i18n.js"></script>
+<link href="/static/js/jquery/plugins/timeentry/jquery.timeentry.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery/plugins/timeentry/jquery.timeentry.js"></script>
+<script type="text/javascript" src="/static/js/jquery/plugins/timeentry/jquery.timeentry-zh-CN.js"></script>
+<script type="text/javascript" src="/static/js/jquery/jquery.cookie.js"></script>
+{% endblock %}

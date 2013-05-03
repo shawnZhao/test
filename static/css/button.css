@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+.cpp-loading {
+	border:3px solid #ccc;
+	float:right;
+	width:270px;
+	position:fixed;
+	z-index:99999999;
+	top:5px;
+	right:5px;
+	border-radius:3px;
+	background:#000 url(http://test.slim.com/static/images/loading.gif) no-repeat 15px center;
+	line-height:20px;
+	height:20px;
+	font-size:14px;
+	color:#fff;
+	padding:15px 15px 15px 34px
+}
+.cpp-iframe {
+	display:none;
+	/*background:url(http://test.slim.com/static/images/transparent-bg.png) repeat;*/
+	position:fixed;
+	z-index:99999999;
+	width:100%;
+	margin:0px;
+	padding:0px;
+	border:0px none;
+	top:0px;
+	left:0px;
+	overflow:hidden;
+}
