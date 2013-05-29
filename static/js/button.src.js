@@ -4,19 +4,36 @@
  */
 var CPPDomain = 'http://test.slim.com/';
 var CPPInit = function ($) {
-    window.loadCPPScript(CPPDomain + 'static/js/jquery/jquery.postmessage.min.js', function() {
+    /*window.loadCPPScript(CPPDomain + 'static/js/jquery/jquery.postmessage.min.js', function() {
         $.receiveMessage(function(e) {
             if (e.data === 'closeWTXToolLay') {
                 document.cpp.isRunning = 0;
                 document.cpp.images = [];
                 $('#CPPIframe').hide();
-            } else if (e.data === 'openWTXToolLay') {
+            } else if (e.data === 'openCPP') {
                 $.postMessage(document.cpp.images.join(','), CPPDomain + 'upload#' + encodeURIComponent(document.location.href), $('#CPPIframe').get(0).contentWindow);
                 $('#CPPIframe').show();
                 $('.cpp-info').remove();
             }
         }, CPPDomain);
-    });
+    });*/
+	var onmessage = function(e) {
+		if (e.data === 'closeCPP') {
+            document.cpp.isRunning = 0;
+            document.cpp.images = [];
+            $('#CPPIframe').hide();
+        } else if (e.data === 'openCPP') {
+        	window.frames['cpp-iframe'].postMessage(document.cpp.images.join(','), '*');
+            //$.postMessage(document.cpp.images.join(','), CPPDomain + 'upload#' + encodeURIComponent(document.location.href), $('#CPPIframe').get(0).contentWindow);
+            $('#CPPIframe').show();
+            $('.cpp-info').remove();
+        }
+	};
+	if (typeof window.addEventListener != 'undefined') {
+		window.addEventListener('message', onmessage, false);
+	} else if (typeof window.attachEvent != 'undefined') {
+		window.attachEvent('onmessage', onmessage);
+	}
     document.cpp = {
         images: [],
         isRunning: 0,
@@ -74,8 +91,8 @@ var CPPInit = function ($) {
                     return false;
                 } else {
                     if ($('#CPPIframe').length <= 0) {
-                        $('body').append('<iframe class="cpp-iframe" scrolling="no" frameborder="0" id="CPPIframe" allowtransparency="true" src="' + CPPDomain + 'upload?refer=' + encodeURIComponent(document.location.href) + '"></iframe>');
-                        $('#CPPIframe').css('height', $(document).height()).show();
+                        $('body').append('<iframe class="cpp-iframe" scrolling="no" frameborder="0" name="cpp-iframe" id="CPPIframe" allowtransparency="true" src="' + CPPDomain + 'upload?refer=' + encodeURIComponent(document.location.href) + '"></iframe>');
+                        $('#CPPIframe').css('height', $(document).height());
                     }
                     return true;
                 }
@@ -85,7 +102,8 @@ var CPPInit = function ($) {
         showDialog: function() {
             if (this.loadDialog()) {
                 var dialogUrl = CPPDomain + '/sina/upload.php#' + encodeURIComponent(document.location.href);
-                $.postMessage('asynLoad', dialogUrl, $('#CPPIframe').get(0).contentWindow);
+            	window.frames['cpp-iframe'].postMessage('openCPP', '*');
+                //$.postMessage('asynLoad', dialogUrl, $('#CPPIframe').get(0).contentWindow);
             }
         },
         loadStyle: function () {

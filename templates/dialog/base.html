@@ -2,37 +2,36 @@
 {% block head %}
 	{{ parent() }}
 	<link href="/static/css/index.css" type="text/css" rel="stylesheet" />
-	<link href="/static/css/weibo.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="/static/js/jquery/jquery.js"></script>
-	<script type="text/javascript" src="/static/js/jquery/jquery.cookie.js"></script>
-	<script type="text/javascript" src="/static/js/jquery/jquery.textlimit.js"></script>
+	<link href="/static/css/weibo.css?v={{version}}" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	<script type="text/javascript" src="/static/js/jquery/jquery.drag.js"></script>
+	<!-- script type="text/javascript" src="/static/js/jquery/jquery.textlimit.js"></script>
 	<script type="text/javascript" src="/static/js/jquery/ui/jquery.ui.core.js"></script>
 	<script type="text/javascript" src="/static/js/jquery/ui/jquery.ui.widget.js"></script>
 	<script type="text/javascript" src="/static/js/jquery/ui/jquery.ui.mouse.js"></script>
 	<script type="text/javascript" src="/static/js/jquery/ui/jquery.ui.draggable.js"></script>
+	<script type="text/javascript" src="/static/js/common.js"></script -->
 	<script type="text/javascript" src="/static/js/jquery/jquery.postmessage.min.js"></script>
-	<script type="text/javascript" src="/static/js/common.js"></script>
 	<script>
 	var images = [];
-	$.receiveMessage( function(e){
-		if(e.data==='asynLoad'){
-			$.postMessage( 'openWTXToolLay', decodeURIComponent(' {{refer}} '), parent );
-		}else{
+	var onmessage = function(e) {
+		if (e.data==='openCPP') {
+			window.parent.postMessage('openCPP', '*');
+        } else {
 			images = e.data.split(',');
 			setImageSrc();
-		}
-	}, '{{referUrl["scheme"]}}://{{referUrl["host"]}}' );
-	function showTip(){
-		$.cookie('chooseImgTip')?'':$('#featuresRemind').show();
-	}
-	function iknow(){
-		$.cookie('chooseImgTip', '1', {expires:365});
-		$('#featuresRemind').remove();
+        }
+	};
+	//监听postMessage消息事件
+	if (typeof window.addEventListener != 'undefined') { // for mozilla
+		window.addEventListener('message', onmessage, false);
+	} else if (typeof window.attachEvent != 'undefined') { // for !mozilla
+		window.attachEvent('onmessage', onmessage);
 	}
 	function setImageSrc(){
 		$('#attachLay .attach_body').html('');
 		if(images.length>1){
-			showTip();
 			$('#attachLay .top .more .left').addClass('lnull');
 			$('#attachLay .top .more .right').removeClass('rnull');
 			$('#attachLay .top .more').show();
@@ -64,7 +63,8 @@
 	function closeToolLayout(){
 		deleteImg();
 		$('#noticeLay').hide();
-		$.postMessage( 'closeWTXToolLay', decodeURIComponent(' {{refer}} '), parent );
+		window.parent.postMessage('closeCPP', '*');
+		//$.postMessage( 'closeCPP', decodeURIComponent(' {{refer}} '), parent );
 	}
 
 	function deleteImg(){
@@ -73,16 +73,14 @@
 		$('#attachLay').hide();
 	}
 	$(function() {
-		$( "#uploadLay" ).draggable({ 
-			handle: '.header', 
-			containment: '#overLayout', 
-			scroll: false
+		window.parent.postMessage('openCPP', '*');
+		//$.postMessage( 'openCPP', decodeURIComponent('{{refer}}'), parent );
+		$('#uploadLay').drag({
+			handler:'#main .header'
 		});
-		$.postMessage( 'openWTXToolLay', decodeURIComponent(' {{refer}} '), parent );
 	});
 	</script>
 {% endblock %}
 {% block main %}
-	<div id="overLayout"></div>
 	{% block dialog %}{% endblock %}
 {% endblock %}

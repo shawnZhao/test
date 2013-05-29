@@ -1,1 +1,48 @@
-#overLayout{width:100%;height:100%;background:#000;}
+body{background:none;}
+#uploadLay{position:absolute;top:50px;left:330px;z-index:11;width:600px;border:5px solid #333;border-radius:3px;font-size:12px;}
+#uploadLay a {color:#777;text-decoration:none;display:inline;}
+#uploadLay a:hover {color:#333;text-decoration:underline;}
+#uploadLay input, #uploadLay select{border:1px solid #ccc;padding:2px;font-size:12px;font-family:arial;}
+#uploadLay textarea{width:98%;height:100px;border-radius:2px;border:1px solid #ccc;padding:5px;margin:0;font-size:14px;line-height:18px;resize:none;}
+
+#uploadLay .header .close, #uploadLay .body .tool .timing, #uploadLay .body .tool .attach, #uploadLay .body .tool .tool_lay .top a, #uploadLay .body .tool .close
+{background:url(/static/images/icon.png) no-repeat;}
+
+#uploadLay .header{cursor:move;background:#eee;height:30px;line-height:30px;vertical-align:middle;border-radius:2px 2px 0 0;}
+#uploadLay .header .title_content{font-size:14px;color:#666;padding-left:30px;line-height:30px;float:left;}
+#uploadLay .header .close, #uploadLay .body .tool .close{background-position:5px -79px;width:20px;height:20px;display:block;float:right;margin:4px 4px 0 0;border:1px dotted #999;}
+#uploadLay .body{padding:0 10px 10px;border-radius:0 0 2px 2px;background:#fff;}
+#uploadLay .body .text-left{float:right;}
+#uploadLay .body .text-left #count{font-size:22px;font-family:Constantia,Georgia;}
+#uploadLay .body .submit{float:right;}
+#uploadLay .body .submit .publish_button{background:url(/static/images/send-weibo.png);width:89px;height:41px;border:0;cursor:pointer;margin-top:3px;}
+#uploadLay .body .tool{float:left;margin:10px 0 0;position:relative;}
+#uploadLay .body .tool .timing, #uploadLay .body .tool .attach {height:15px;line-height:15px;padding:2px 0 2px 20px;float:left;margin-right:8px;}
+#uploadLay .body .tool .timing {background-position:0 -23px;}
+#showTiming{line-height:20px;height:20px;}
+#uploadLay .body .tool .attach {background-position:0 -46px;position:relative;overflow:hidden;}
+#imageUpload{cursor:pointer;opacity:0;position:absolute;left:0;top:0;filter:alpha(opacity=0);width:70px;height:18px;}
+
+#uploadLay .body .tool .tool_lay{background:#fff;border:5px solid #333;position:absolute;top:25px;border-radius:3px;z-index:12;padding:2px;display:none;}
+#uploadLay .body .tool .tool_lay .lay_arrow {background:url(/static/images/icon.png) 0 -142px no-repeat;width:16px;height:14px;position:absolute;left:20px;top:-13px;}
+#uploadLay .body .tool .tool_lay .top{background:#efefef;height:25px;}
+#uploadLay .body .tool .tool_lay .top a{line-height:25px;margin-left:10px;padding-left:13px;}
+#uploadLay .body .tool #attachLay{width:200px;left:-25px;z-index:13;}
+#uploadLay .body .tool #attachLay .top a{background-position:0 -68px;color:#c63}
+#uploadLay .body .tool #attachLay .top .more{float:right;width:30px;margin:3px 6px 0 0;}
+#uploadLay .body .tool #attachLay .top .more .left, #uploadLay .body .tool #attachLay .top .more .right
+{width:8px;height:14px;margin:0;padding:0;overflow:hidden;text-indent:-100px;}
+#uploadLay .body .tool #attachLay .top .more .left{float:left;background-position:0 -124px;margin-right:10px;}
+#uploadLay .body .tool #attachLay .top .more .lnull{background-position:0 -109px;}
+#uploadLay .body .tool #attachLay .top .more .right{float:right;background-position:-8px -124px;}
+#uploadLay .body .tool #attachLay .top .more .rnull{background-position:-8px -109px;}
+#uploadLay .body .tool #attachLay .attach_body {text-align:center;}
+#uploadLay .body .tool #attachLay .attach_body p{background:url('/images/loading.gif') 44px 50% no-repeat;height:30px;line-height:30px;padding-left:20px;color:#444;}
+#uploadLay .body .tool #timingLay{width:400px;left:49px;}
+#uploadLay .body .tool #timingLay .top #timingOperate{background-position:0 -98px;color:#090;padding-left:16px;}
+#uploadLay .body .tool #timingLay .top span{line-height:25px;padding-left:20px;color:#666;}
+#uploadLay .body .tool #timingLay .top .notice{color:red;margin-left:10px;}
+#uploadLay .body .tool #timingLay .close{margin:2px 2px 0 0;}
+#uploadLay .body .tool #timingLay .timing_body{padding:5px 0 5px 10px;}
+#uploadLay .body .tool #timingLay .timing_body p{height:30px;line-height:30px;}
+#uploadLay .body .tool #timingLay .timing_body p .tip{color:#999;margin-left:5px;}
