@@ -1,4 +1,4 @@
-{% macro upload() %}
+{% macro upload(refer) %}
     <div id="uploadLay" style="top:50px">
 		<!-- script type="text/javascript" src="/js/upload.js"></script -->
 		<div class="header">
@@ -32,14 +32,14 @@
 		</div>
 	</div>
 {% endmacro %}
-{% macro wbauth() %}
+{% macro authToken(authUrl) %}
 	<div id="uploadLay" style="top:50px">
 		<div class="header">
 			<span class="title_content">应用授权</span>
 			<a class="close" href="javascript:closeToolLayout();"></a>
 		</div>
 		<div class="body">
-			<iframe frameborder="0" scrolling="no" style="width:570px;height:360px;margin-left:5px;" src="<?php echo $o->getAuthorizeURL(WB_CALLBACK_URL,'code','/sina/upload_refresh.php?refer='.$refer,'popup')?>"></iframe>
+			<iframe frameborder="0" scrolling="no" style="width:100%;height:440px;" src="{{authUrl}}"></iframe>
 		</div>
 	</div>
 {% endmacro %}

@@ -2,7 +2,7 @@
 /*
  * cpp = cloudPushpin
  */
-var CPPDomain = 'http://test.slim.com/';
+var CPPDomain = 'http://cloudpushpin.sinaapp.com/';
 var CPPInit = function ($) {
     /*window.loadCPPScript(CPPDomain + 'static/js/jquery/jquery.postmessage.min.js', function() {
         $.receiveMessage(function(e) {

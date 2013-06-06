@@ -8,7 +8,7 @@
 	top:5px;
 	right:5px;
 	border-radius:3px;
-	background:#000 url(http://test.slim.com/static/images/loading.gif) no-repeat 15px center;
+	background:#000 url(http://cloudpushpin.sinaapp.com/static/images/loading.gif) no-repeat 15px center;
 	line-height:20px;
 	height:20px;
 	font-size:14px;
@@ -17,7 +17,7 @@
 }
 .cpp-iframe {
 	display:none;
-	background:url(http://test.slim.com/static/images/transparent-bg.png) repeat;
+	background:url(http://cloudpushpin.sinaapp.com/static/images/transparent-bg.png) repeat;
 	position:fixed;
 	z-index:2147483747;
 	width:100%;

@@ -1,7 +1,7 @@
 {% extends "dialog/base.html" %}
-{% block title %}云图钉-发微博{% endblock %}
+{% block title %}云图钉-应用授权{% endblock %}
 
 {% block dialog %}
 	{% import "macro.html" as macro %}
-	{{ macro.upload( refer ) }}
+	{{ macro.authToken( authUrl ) }}
 {% endblock %}

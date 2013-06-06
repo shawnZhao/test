@@ -4,6 +4,7 @@ require_once './config.php';
 
 mb_internal_encoding ( "UTF-8" );
 date_default_timezone_set ( 'Asia/Shanghai' );
+session_start();
 
 $app = new \Slim\Slim(array(
 		'mode' => 'development',
