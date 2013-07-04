@@ -10,7 +10,10 @@ $aBitOfInfo = function (\Slim\Route $route) {
 };
 
 $app->get('/', function () use ($app) {
-	echo $app->render('index.html');
+	echo $app->render('index.html', array(
+			'name' => 'shawn',
+			'buttonJs' => buttonJS
+			));
 });
 
 $app->get('/welcome', $aBitOfInfo, function () use ($app) {

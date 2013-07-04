@@ -1,6 +1,8 @@
 <?php
 require_once './vendor/autoload.php';
 require_once './config.php';
+require_once './lib/base/FullPage.php';
+require_once './lib/base/Exceptions.php';
 
 mb_internal_encoding ( "UTF-8" );
 date_default_timezone_set ( 'Asia/Shanghai' );
